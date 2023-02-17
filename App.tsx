@@ -7,15 +7,15 @@
 
 // // import React from 'react';
 // // import type {PropsWithChildren} from 'react';
-// // import {
-// //   SafeAreaView,
-// //   ScrollView,
-// //   StatusBar,
-// //   StyleSheet,
-// //   Text,
-// //   useColorScheme,
-// //   View,
-// // } from 'react-native';
+// import {
+//   SafeAreaView,
+//   ScrollView,
+//   StatusBar,
+//   StyleSheet,
+//   Text,
+//   useColorScheme,
+//   View,
+// } from 'react-native';
 
 // // import {
 // //   Colors,
@@ -148,7 +148,7 @@
 //     <NavigationContainer>
 //       <Stack.Navigator>
 //         <Stack.Screen name="Home" component={HomeScreen} />
-//         <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+//         {/* <Stack.Screen name="DetailsScreen" component={DetailsScreen} /> */}
 //       </Stack.Navigator>
 //     </NavigationContainer>
 //   );
@@ -160,7 +160,7 @@ import React from "react";
 
 import AppNavigation from "./src/routes";
 
-const App: React.FC<{}> = () => {
+const App: React.FC = () => {
   return <AppNavigation />;
 };
 
