@@ -1,17 +1,17 @@
-import React from "react";
-import { NavigationContainer, EventMapBase } from "@react-navigation/native";
+import React from 'react';
+import { NavigationContainer, EventMapBase } from '@react-navigation/native';
 
-import type { RouteConfig, StackNavigationState } from "@react-navigation/core";
+import type { RouteConfig, StackNavigationState } from '@react-navigation/core';
 
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
-} from "@react-navigation/native-stack";
+} from '@react-navigation/native-stack';
 
-import HomeScreen from "../pages/HomeScreen";
-import DetailsScreen from "../pages/DetailsScreen";
-import ProfileScreen from "../pages/ProfileScreen";
-import TabScreen from "../components/BaseTab";
+import HomeScreen from '../pages/HomeScreen';
+import DetailsScreen from '../pages/DetailsScreen';
+import ProfileScreen from '../pages/ProfileScreen';
+import TabScreen from '../components/BaseTab';
 
 export type AppRouteConfig = RouteConfig<
   AppParamList,
@@ -24,22 +24,22 @@ export type AppRouteConfig = RouteConfig<
 
 const routes: AppRouteConfig[] = [
   {
-    name: "Home",
+    name: 'Home',
     component: HomeScreen,
   },
   {
-    name: "Details",
+    name: 'Details',
     component: DetailsScreen,
   },
   {
-    name: "Tab",
+    name: 'Tab',
     component: TabScreen,
     options: {
       headerShown: false,
     },
   },
   {
-    name: "Profile",
+    name: 'Profile',
     component: ProfileScreen,
   },
 ];
