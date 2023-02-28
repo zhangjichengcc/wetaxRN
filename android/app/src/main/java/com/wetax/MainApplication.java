@@ -1,6 +1,7 @@
 package com.wetax;
 
 import android.app.Application;
+
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -9,6 +10,8 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
+
+import gov.chinatax.tpass.depend.core.CredibleAuthSDK;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -24,7 +27,8 @@ public class MainApplication extends Application implements ReactApplication {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
+//            packages.add(new MyReactNativePackage());
+            packages.add(new MyAppPackage());
           return packages;
         }
 
@@ -52,7 +56,11 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    //初始化授权sdk
+    CredibleAuthSDK.getInstance().init(this);
     SoLoader.init(this, /* native exopackage */ false);
+    // 可信sdk初始化
+//    CredibleAuthSDK.getInstance().init(this);
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
       DefaultNewArchitectureEntryPoint.load();
