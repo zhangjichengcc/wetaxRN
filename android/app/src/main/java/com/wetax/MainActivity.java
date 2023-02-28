@@ -4,8 +4,6 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactActivityDelegate;
-// 导入Bundle类，该类的格式为key-value，用于实现数据的传递
-import android.os.Bundle;
 
 public class MainActivity extends ReactActivity {
 
@@ -16,13 +14,6 @@ public class MainActivity extends ReactActivity {
   @Override
   protected String getMainComponentName() {
     return "wetax";
-  }
-
-  // 覆写生命周期函数,在Activity被创建时调用
-  // 而Bundle类型的savedInstanceState可以保存状态数据
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(null);
   }
 
   /**

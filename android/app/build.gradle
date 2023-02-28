@@ -35,10 +35,14 @@ react {
     // bundleConfig = file(../rn-cli.config.js)
     //
     //   The name of the generated asset file containing your JS bundle
-    // bundleAssetName = "MyApplication.android.bundle"
+    // bundleAssetName = "index.android.bundle"
+     //bundleInDebug = true
+     //bundleInAlpha = true
+     //bundleInBeta = true
+
     //
     //   The entry file for bundle generation. Default is 'index.android.js' or 'index.js'
-    // entryFile = file("../js/MyApplication.android.js")
+    // entryFile = file("index.js")
     //
     //   A list of extra flags to pass to the 'bundle' commands.
     //   See https://github.com/react-native-community/cli/blob/main/docs/commands.md#bundle
@@ -102,6 +106,12 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        ndk {
+            //选择要添加的对应 cpu 类型的 .so 库。
+            abiFilters "armeabi-v7a", "arm64-v8a"
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
     }
 
     splits {
@@ -148,13 +158,25 @@ android {
 
         }
     }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    packagingOptions {
+        pickFirst 'lib/armeabi/libc++_shared.so'
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+    }
 }
 
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
+    implementation('androidx.swiperefreshlayout:swiperefreshlayout:1.1.0')
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
@@ -167,6 +189,54 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+
+    // 可信认证
+    implementation(name: 'dependSdkLib_V1.5.3.13', ext: 'aar')
+// 活体检测
+    implementation(name: 'LiveDetect_V3.2.17', ext: 'aar')
+// 协同签名
+    implementation(name: 'xtqmSDK', ext: 'aar')
+// ifaa
+    debugImplementation (name:'esand_cloud_ifaa-debug.1.4.8.2',ext:'aar')
+    releaseImplementation (name:'esand_cloud_ifaa-release.1.4.8',ext:'aar')
+    // 依赖第三方库
+// 活体依赖的
+    implementation 'net.java.dev.jna:jna:5.6.0@aar'
+// 网络框架
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.0.1'
+    implementation 'com.alibaba:fastjson:1.1.70.android'
+// 协同签名第三方相关库
+    implementation 'com.tencent:mmkv:1.0.23'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.6.2'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'cn.hutool:hutool-all:5.4.4'
+    implementation 'org.bouncycastle:bcprov-jdk15to18:1.68'
+    implementation 'com.alibaba:fastjson:1.2.51'
+// jsbridge
+    implementation 'com.github.lzyzsd:jsbridge:1.0.4'
+
 }
+
+task wrapper(type: Wrapper){
+    gradleVersion = '7.5.1'
+}
+
+task prepareKotlinBuildScriptModel {
+}
+
+//project.ext.react=[
+//    entryFile:"index.js",
+//    bundleAssetName:"index.android.bundle",
+//    bundleInDebug:true,
+//    bundleInAlpha:true,
+//    bundleInBeta:true
+//]
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
